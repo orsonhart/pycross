@@ -177,7 +177,12 @@ class MyDialog:
         top = self.top 
 
         # Get list of files from specified directory.
-        files = os.listdir(os.getcwd()+"/"+directory)
+        try:
+            files = os.listdir(os.getcwd()+"/"+directory)
+        # If directory does not exist, create it.
+        except:
+            os.mkdir(os.getcwd()+"/"+directory)
+            files = os.listdir(os.getcwd()+"/"+directory)
         # Sort them.
         files = merge_sort(files)
         # If they are saves, then reverse list (as reverse chronologically = reverse alphabetically)
